@@ -13,7 +13,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: loginScreen,
-        builder: (context, state) => const LoginScreen(),
+        builder: (context, state) => LoginScreen(),
       ),
     ],
   );

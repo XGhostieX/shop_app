@@ -18,9 +18,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   var boardController = PageController();
   bool isLast = false;
   final List<OnBoarding> onBoardingItems = [
-    OnBoarding(onboard_0, 'OnBoarding_0 Title', 'OnBoarding_0 Body'),
-    OnBoarding(onboard_1, 'OnBoarding_1 Title', 'OnBoarding_1 Body'),
-    OnBoarding(onboard_2, 'OnBoarding_2 Title', 'OnBoarding_2 Body'),
+    OnBoarding(onboard_0, 'Sales and Gifts',
+        'Holiday sales, Birthday gifts, Various choice and categories.'),
+    OnBoarding(onboard_1, 'Online shopping',
+        'Make an order sitting on sofa. Pay and choose online.'),
+    OnBoarding(onboard_2, 'Open 24 Hour',
+        'Yes, we are open for 24 hour, to produce a high quality service for you'),
   ];
 
   @override
@@ -88,6 +91,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       );
                     }
                   },
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   child: const Icon(Icons.arrow_forward_ios),
                 )
               ],

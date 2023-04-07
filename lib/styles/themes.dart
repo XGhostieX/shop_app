@@ -36,7 +36,7 @@ ThemeData lightTheme = ThemeData(
     primary: const Color.fromRGBO(98, 0, 238, 1),
     secondary: const Color.fromRGBO(3, 218, 197, 1),
   ),
-  fontFamily: 'Jannah',
+  // fontFamily: 'Janna',
 );
 
 ThemeData darkTheme = ThemeData(
@@ -73,5 +73,5 @@ ThemeData darkTheme = ThemeData(
     primary: const Color.fromRGBO(98, 0, 238, 1),
     secondary: const Color.fromRGBO(3, 218, 197, 1),
   ),
-  fontFamily: 'Jannah',
+  // fontFamily: 'Janna',
 );
