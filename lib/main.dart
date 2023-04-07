@@ -4,13 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'cubits/cubit.dart';
 import 'cubits/states.dart';
 import 'helpers/app_router.dart';
+import 'helpers/bloc_observer.dart';
+import 'helpers/dio_helper.dart';
 import 'styles/themes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // DioHelper.init();
+  DioHelper.init();
   // await CasheHelper.init();
   // bool? isDark = CasheHelper.getData('isDark');
+  Bloc.observer = MyBlocObserver();
   runApp(const ShopApp());
 }
 

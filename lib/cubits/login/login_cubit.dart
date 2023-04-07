@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../helpers/constants.dart';
 import '../../helpers/dio_helper.dart';
+import '../../models/login_model/login_model.dart';
 
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   IconData suffix = Icons.visibility_outlined;
   bool isPassword = true;
+  late LoginModel loginModel;
 
   LoginCubit() : super(LoginInitial());
 
@@ -22,9 +24,13 @@ class LoginCubit extends Cubit<LoginState> {
     DioHelper.postData(url: login, data: {
       'email': email,
       'password': password,
-    })
-        .then((value) => emit(LoginSuccess()))
-        .catchError((error) => emit(LoginError(error.toString())));
+    }).then((value) {
+      loginModel = LoginModel.fromMap(value.data);
+      emit(LoginSuccess(loginModel));
+    }).catchError((error) {
+      print(error.toString());
+      emit(LoginError(error.toString()));
+    });
   }
 
   void changePassword() {

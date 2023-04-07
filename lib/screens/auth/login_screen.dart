@@ -1,6 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../cubits/login/login_cubit.dart';
@@ -25,7 +26,29 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is LoginSuccess) {
+            if (state.login.status!) {
+              Fluttertoast.showToast(
+                  msg: state.login.message!,
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 5,
+                  backgroundColor: Colors.green,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            } else {
+              Fluttertoast.showToast(
+                  msg: state.login.message!,
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 5,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            }
+          }
+        },
         builder: (context, state) => Scaffold(
           appBar: AppBar(),
           body: Center(
