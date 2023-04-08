@@ -5,20 +5,24 @@ import 'cubits/cubit.dart';
 import 'cubits/states.dart';
 import 'helpers/app_router.dart';
 import 'helpers/bloc_observer.dart';
+import 'helpers/cashe_helper.dart';
 import 'helpers/dio_helper.dart';
 import 'styles/themes.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
-  // await CasheHelper.init();
+  await CasheHelper.init();
   // bool? isDark = CasheHelper.getData('isDark');
+  // bool? onBoarding = CasheHelper.getData('onBoarding');
   Bloc.observer = MyBlocObserver();
   runApp(const ShopApp());
 }
 
 class ShopApp extends StatelessWidget {
-  const ShopApp({super.key});
+  const ShopApp({
+    super.key,
+  });
 
   // This widget is the root of your application.
   @override

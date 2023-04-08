@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shop_app/helpers/cashe_helper.dart';
+import 'package:shop_app/widgets/flutter_toast.dart';
 
 import '../../cubits/login/login_cubit.dart';
 import '../../helpers/app_router.dart';
@@ -29,23 +31,15 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           if (state is LoginSuccess) {
             if (state.login.status!) {
-              Fluttertoast.showToast(
-                  msg: state.login.message!,
-                  toastLength: Toast.LENGTH_LONG,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 5,
-                  backgroundColor: Colors.green,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
+              showToast(msg: state.login.message!, state: ToastStates.sucess);
+              CasheHelper.setData(
+                key: 'token',
+                value: state.login.data!.token,
+              ).then((value) => GoRouter.of(context).pushReplacement(
+                    AppRouter.shopScreen,
+                  ));
             } else {
-              Fluttertoast.showToast(
-                  msg: state.login.message!,
-                  toastLength: Toast.LENGTH_LONG,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 5,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
+              showToast(msg: state.login.message!, state: ToastStates.error);
             }
           }
         },

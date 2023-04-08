@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shop_app/helpers/cashe_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../helpers/app_router.dart';
@@ -30,13 +31,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          TextButton(
-              onPressed: () => GoRouter.of(context).pushReplacement(
-                    AppRouter.loginScreen,
-                  ),
-              child: const Text('SKIP'))
-        ],
+        actions: [TextButton(onPressed: submit, child: const Text('SKIP'))],
       ),
       body: Padding(
         padding: const EdgeInsets.all(30.0),
@@ -81,9 +76,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 FloatingActionButton(
                   onPressed: () {
                     if (isLast) {
-                      GoRouter.of(context).pushReplacement(
-                        AppRouter.loginScreen,
-                      );
+                      submit();
                     } else {
                       boardController.nextPage(
                         duration: const Duration(milliseconds: 750),
@@ -100,5 +93,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         ),
       ),
     );
+  }
+
+  void submit() {
+    CasheHelper.setData(key: 'onBoarding', value: true).then((value) {
+      if (value) {
+        GoRouter.of(context).pushReplacement(
+          AppRouter.loginScreen,
+        );
+      }
+    });
   }
 }
