@@ -7,6 +7,7 @@ import 'cubits/states.dart';
 import 'helpers/app_router.dart';
 import 'helpers/bloc_observer.dart';
 import 'helpers/cashe_helper.dart';
+import 'helpers/constants.dart';
 import 'helpers/dio_helper.dart';
 import 'styles/themes.dart';
 
@@ -16,6 +17,7 @@ Future<void> main() async {
   await CasheHelper.init();
   // bool? isDark = CasheHelper.getData('isDark');
   // bool? onBoarding = CasheHelper.getData('onBoarding');
+  token = CasheHelper.getData('token');
   Bloc.observer = MyBlocObserver();
   runApp(const ShopApp());
 }
