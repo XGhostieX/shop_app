@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../screens/auth/login_screen.dart';
 import '../screens/auth/register_screen.dart';
 import '../screens/on_boarding_screen.dart';
+import '../screens/shop/search_screen.dart';
 import '../screens/shop/shop_screen.dart';
 import 'cashe_helper.dart';
 
@@ -13,6 +13,7 @@ abstract class AppRouter {
   static const loginScreen = '/login';
   static const registerScreen = '/register';
   static const shopScreen = '/shop';
+  static const searchScreen = '/search';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -27,9 +28,7 @@ abstract class AppRouter {
             } else {
               return const OnBoardingScreen();
             }
-          }
-          //onBoarding ? LoginScreen() : const OnBoardingScreen(),
-          ),
+          }),
       GoRoute(
         path: loginScreen,
         builder: (context, state) => LoginScreen(),
@@ -41,6 +40,10 @@ abstract class AppRouter {
       GoRoute(
         path: shopScreen,
         builder: (context, state) => const ShopScreen(),
+      ),
+      GoRoute(
+        path: searchScreen,
+        builder: (context, state) => const SearchScreen(),
       ),
     ],
   );

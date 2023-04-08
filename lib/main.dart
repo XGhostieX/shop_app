@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'cubits/cubit.dart';
+import 'cubits/shop/shop_cubit.dart';
 import 'cubits/states.dart';
 import 'helpers/app_router.dart';
 import 'helpers/bloc_observer.dart';
@@ -32,6 +33,7 @@ class ShopApp extends StatelessWidget {
         BlocProvider(create: (context) => AppCubit()
             //..changeAppMode(sharedDark: isDark),
             ),
+        BlocProvider(create: (context) => ShopCubit()..getHomeData()),
       ],
       child: BlocConsumer<AppCubit, AppStates>(
         builder: (context, state) => MaterialApp.router(

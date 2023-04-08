@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shop_app/helpers/cashe_helper.dart';
 
+import '../../cubits/shop/shop_cubit.dart';
 import '../../helpers/app_router.dart';
 
 class ShopScreen extends StatelessWidget {
@@ -9,19 +10,29 @@ class ShopScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('MyShop'),
-      ),
-      body: TextButton(
-        onPressed: () {
-          CasheHelper.removeData('token')
-              .then((value) => GoRouter.of(context).pushReplacement(
-                    AppRouter.loginScreen,
-                  ));
-        },
-        child: const Text('Sign Out'),
-      ),
+    return BlocConsumer<ShopCubit, ShopState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = ShopCubit.get(context);
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('MyShop'),
+            actions: [
+              IconButton(
+                  onPressed: () => GoRouter.of(context).push(
+                        AppRouter.searchScreen,
+                      ),
+                  icon: const Icon(Icons.search))
+            ],
+          ),
+          body: cubit.screens[cubit.currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            onTap: (value) => cubit.changeBottomNav(value),
+            currentIndex: cubit.currentIndex,
+            items: cubit.bottomItems,
+          ),
+        );
+      },
     );
   }
 }
